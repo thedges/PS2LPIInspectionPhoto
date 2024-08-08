@@ -3,7 +3,7 @@ THIS SOFTWARE IS COVERED BY [THIS DISCLAIMER](https://raw.githubusercontent.com/
 
 Simple demo LWC to show all photos related to a PSS Visit. Provides the following features:
 * Shows all photos attached to Inspection Assessment Indicator records
-* Can filter photos based on task names
+* Can filter photos based on task name or assessment result (typically Pass or Fail). Filter logic is AND'ing these.
 * Click on photo to get preview modal which allows to download photo
 * Click on task name to jump to Task record
 * Click on assessment name to jump to Inspection Assessment Indicator record
