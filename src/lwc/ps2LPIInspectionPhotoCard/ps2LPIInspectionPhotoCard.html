@@ -1,0 +1,55 @@
+<template>
+    <!---
+    <lightning-layout-item key={id} size="3" class="slds-var-p-around_x-small">
+	
+        <lightning-card title={content.taskName}>
+        -->
+    <div id={id} class="slds-p-around_x-small" style="border-radius: 5px;
+            border-style: solid; 
+            border-width: 1px; 
+            border-color: #cccccc; 
+            height: 100%;
+            box-shadow: 5px 5px 2px #b3b3b3;">
+        <div class="content-img">
+            <img src={thumbnailURL} onclick={handlePreview}></img>
+        </div>
+        <div class="image-details slds-p-bottom_small">
+            {content.contentOwnerName} - {content.createdDate}
+        </div>
+        <div>
+            <dl class="slds-list_horizontal slds-wrap">
+                <dt class="slds-item_label slds-text-color_weak slds-truncate" title="First Label"><span class="task-label">Task:</span></dt>
+                <dd class="slds-item_detail slds-wrap" title="Description for first label"><span class="task-name" onclick={handleTask}>{content.taskName}</span></dd>
+                <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label"><span class="assessment-label">Assessment:</span></dt>
+                <dd class="slds-item_detail slds-wrap" title="Description for second label"><span class="assessment-name" onclick={handleAssessment}>{content.assessmentName}</span></dd>
+              </dl>
+
+              <!--
+            <table>
+                <tr>
+                    <td><span class="task-label">Task:</span></td>
+                    <td><span class="task-name" onclick={handleTask}>{content.taskName}</span></td>
+
+                </tr>
+                <tr>
+                    <td><span class="assessment-label">Assessment:</span></td>
+                    <td><span class="assessment-name" onclick={handleAssessment}>{content.assessmentName}</span></td>
+                </tr>
+            </table>
+            -->
+        </div>
+        <!--
+            <div>
+                <lightning-icon icon-name="utility:location_permit" alternative-text="Assessment" title="Assessment" size="small" onclick={handleAssessment}></lightning-icon>
+                <lightning-icon icon-name="utility:task" alternative-text="Task" title="Task" size="small" onclick={handleTask}></lightning-icon>
+                <lightning-icon icon-name="utility:preview" alternative-text="Preview" title="Preview" size="small" onclick={handlePreview}></lightning-icon>
+                <lightning-icon icon-name="utility:download" alternative-text="Download" title="Download" size="small" onclick={handleDownload}></lightning-icon>
+            </div>
+            -->
+    </div>
+    <!--
+        </lightning-card>
+
+    </lightning-layout-item>
+    -->
+</template>

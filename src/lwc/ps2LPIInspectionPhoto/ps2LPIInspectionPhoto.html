@@ -1,0 +1,37 @@
+<template>
+	<lightning-card title={cardTitle} icon-name={cardIcon}>
+
+		<div class="slds-card__body slds-card__body_inner">
+
+				<template if:true={taskOptions}>
+					<div style="max-width: 50%;">
+						<lightning-combobox name="select-task" label="Filter By Task" value={taskOptionValue}
+							placeholder="Select Task" options={taskOptions} onchange={handleTaskOption}
+							variant="label-inline"></lightning-combobox>
+					</div>
+				</template>
+
+				<!-- Start bear list -->
+				<template if:true={contentList}>
+					<div class="slds-grid slds-wrap slds-gutters_x-small slds-grid--vertical-stretch">
+						<template for:each={filteredContentList} for:item="content">
+							<div key={content.contentId}
+								class="slds-col slds-p-bottom_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_4-of-12">
+								<c-ps2-l-p-i-inspection-photo-card
+									content={content}></c-ps2-l-p-i-inspection-photo-card>
+							</div>
+						</template>
+					</div>
+				</template>
+				<!-- End bear list -->
+				<!-- Data failed to load -->
+				<template if:true={error}>
+					<div class="slds-text-color_error">
+						An error occurred while loading...
+						{error}
+					</div>
+				</template>
+
+		</div>
+	</lightning-card>
+</template>

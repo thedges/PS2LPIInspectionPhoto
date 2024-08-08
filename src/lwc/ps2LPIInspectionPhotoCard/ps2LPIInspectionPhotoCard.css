@@ -1,0 +1,44 @@
+img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;  
+    height: 300px;
+    width:auto;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.content-img {
+    cursor: pointer;
+}
+
+.image-details {
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+.task-label {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #2D5B9F;
+}
+
+
+
+.task-name {
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.assessment-label {
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #2D5B9F;
+}
+
+.assessment-name {
+    font-size: 1.0em;
+    cursor: pointer;
+}
