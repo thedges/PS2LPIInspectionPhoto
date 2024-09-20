@@ -24,8 +24,9 @@ Simple demo LWC to show all photos related to a PSS Visit. Provides the followin
 
 <b>Here are steps to use this component:</b>
   1. Install the component per the **Deploy to Salesforce** button below
-  2. Drop the **PS2VisitPhotos** Lightning Component on to a Visit record page.
-  3. Configure the Lightning Component by setting the card title and icon.
+  2. Make sure any user accessing the component has access to the **PS2LPIInspectionPhotoController** apex class
+  3. Drop the **PS2VisitPhotos** Lightning Component on to a Visit record page.
+  4. Configure the Lightning Component by setting the card title and icon.
 
      
 <a href="https://githubsfdeploy.herokuapp.com?owner=thedges&repo=PS2LPIInspectionPhoto&ref=main">
