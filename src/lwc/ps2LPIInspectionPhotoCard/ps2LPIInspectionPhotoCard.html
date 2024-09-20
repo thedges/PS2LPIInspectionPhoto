@@ -11,8 +11,24 @@
             height: 100%;
             box-shadow: 5px 5px 2px #b3b3b3;">
         <div class="content-img">
-            <img src={thumbnailURL} onclick={handlePreview}></img>
+            <img class="preview-img" src={thumbnailURL} onclick={handlePreview}></img>
+
+            <div class="content-icons">
+                <template if:true={isViolation}>
+                   <img class="status-icon" src={violationIcon} onclick={handleViolation}>
+                </template>   
+            </div>
+
+            <div class="assmt-icons">
+                <template if:true={isPass}>
+                   <img class="status-icon" src={passIcon}>
+                </template>   
+                <template if:true={isFail}>
+                    <img class="status-icon" src={failIcon}>
+                 </template>   
+            </div>
         </div>
+
         <div class="image-details slds-p-bottom_small">
             {content.contentOwnerName} - {content.createdDate}
         </div>
@@ -38,6 +54,7 @@
             </table>
             -->
         </div>
+
         <!--
             <div>
                 <lightning-icon icon-name="utility:location_permit" alternative-text="Assessment" title="Assessment" size="small" onclick={handleAssessment}></lightning-icon>
@@ -47,6 +64,7 @@
             </div>
             -->
     </div>
+
     <!--
         </lightning-card>
 

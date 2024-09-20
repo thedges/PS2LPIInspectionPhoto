@@ -1,36 +1,47 @@
 <template>
 	<lightning-card title={cardTitle} icon-name={cardIcon}>
-
+		<div slot="actions">
+			<lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh" title="Refresh"
+				onclick={handleRefresh} size="medium"></lightning-button-icon>
+		</div>
 		<div class="slds-card__body slds-card__body_inner">
-
+			<div class="options-container">
 				<template if:true={taskOptions}>
-					<div style="max-width: 50%;">
+					<div class="options-item">
 						<lightning-combobox name="select-task" label="Filter By Task" value={taskOptionValue}
 							placeholder="Select Task" options={taskOptions} onchange={handleTaskOption}
-							variant="label-inline"></lightning-combobox>
+							variant="label-stacked"></lightning-combobox>
 					</div>
 				</template>
+				<template if:true={resultOptions}>
+					<div class="options-item">
+						<lightning-combobox name="select-result" label="Assessment Result" value={resultOptionValue}
+							placeholder="Select Result" options={resultOptions} onchange={handleResultOption}
+							variant="label-stacked"></lightning-combobox>
+					</div>
+				</template>
+			</div>
 
-				<!-- Start bear list -->
-				<template if:true={contentList}>
-					<div class="slds-grid slds-wrap slds-gutters_x-small slds-grid--vertical-stretch">
-						<template for:each={filteredContentList} for:item="content">
-							<div key={content.contentId}
-								class="slds-col slds-p-bottom_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_4-of-12">
-								<c-ps2-l-p-i-inspection-photo-card
-									content={content}></c-ps2-l-p-i-inspection-photo-card>
-							</div>
-						</template>
-					</div>
-				</template>
-				<!-- End bear list -->
-				<!-- Data failed to load -->
-				<template if:true={error}>
-					<div class="slds-text-color_error">
-						An error occurred while loading...
-						{error}
-					</div>
-				</template>
+
+			<template if:true={contentList}>
+				<div class="slds-grid slds-wrap slds-gutters_x-small slds-grid--vertical-stretch">
+					<template for:each={filteredContentList} for:item="content">
+						<div key={content.contentId}
+							class="slds-col slds-p-bottom_medium slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_4-of-12">
+							<c-ps2-l-p-i-inspection-photo-card content={content}></c-ps2-l-p-i-inspection-photo-card>
+						</div>
+					</template>
+				</div>
+			</template>
+
+			<!-- Failed to load error -->
+			<template if:true={error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading...
+					{error}
+				</div>
+			</template>
+
 
 		</div>
 	</lightning-card>

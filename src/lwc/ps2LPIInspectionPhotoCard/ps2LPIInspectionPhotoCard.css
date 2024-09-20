@@ -1,4 +1,4 @@
-img {
+.preview-img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;  
     height: 300px;
@@ -8,10 +8,25 @@ img {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    border: 1px solid #e4e3e3;
 }
 
 .content-img {
     cursor: pointer;
+    position: relative;
+}
+
+.content-icons {
+	position: absolute; top: 0px; right: 0px; z-index: 5; padding: 3px; 
+}
+
+.assmt-icons {
+	position: absolute; top: 0px; left: 0px; z-index: 5; padding: 3px; 
+}
+
+.status-icon {
+    width:20px;
+    height:20px;
 }
 
 .image-details {

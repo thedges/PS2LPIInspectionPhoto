@@ -20,10 +20,12 @@ public with sharing class PS2LPIInspectionPhotoController
         List<Id> assessmentIdList = new List<Id>();
         List<Id> contentIdList = new List<Id>();
         List<String> taskList = new List<String>();
+        List<String> resultList = new List<String>();
         Map<String, PS2Assessment> assmntMap = new Map<String, PS2Assessment>();
 
 
-        List<InspectionAssessmentInd> assessmentList = [SELECT Id, Result, AssessmentTaskId, AssessmentTask.Name, AssessmentIndDefinitionId, AssessmentIndDefinition.Name, DisplayOrder, NumberFieldResponse, PercentageFieldResponse, TextFieldResponse, DateTimeFieldResponse, DecimalFieldResponse
+        List<InspectionAssessmentInd> assessmentList = [SELECT Id, Result, AssessmentTaskId, AssessmentTask.Name, AssessmentIndDefinitionId, AssessmentIndDefinition.Name, DisplayOrder, NumberFieldResponse, PercentageFieldResponse, TextFieldResponse, DateTimeFieldResponse, DecimalFieldResponse, 
+                                                        (SELECT Id, Name, Status, ViolationType.Name, ViolationType.Type, ResolutionNotes FROM RegCodeInspectionAssmntInd  WHERE Status != 'Resolved')
                                                         FROM InspectionAssessmentInd
                                                         WHERE AssessmentTask.ParentId = :recordId];
 
@@ -36,11 +38,21 @@ public with sharing class PS2LPIInspectionPhotoController
             a.assessmentName = assessment.AssessmentIndDefinition.Name;
             a.assessmentResult = assessment.Result;
             a.assessmentDisplayOrder = assessment.DisplayOrder;
+
+            if (assessment.RegCodeInspectionAssmntInd != null && !assessment.RegCodeInspectionAssmntInd.isEmpty())
+            {
+                a.openViolation = true;
+            }
             //contentList.add(content);
 
             if (!taskList.contains(assessment.AssessmentTask.Name))
             {
                 taskList.add(assessment.AssessmentTask.Name);
+            }
+
+            if (!resultList.contains(assessment.Result))
+            {
+                resultList.add(assessment.Result);
             }
 
             assmntMap.put(assessment.Id, a);
@@ -63,6 +75,7 @@ public with sharing class PS2LPIInspectionPhotoController
             p.assessmentName = a.assessmentName;
             p.assessmentResult = a.assessmentResult;
             p.assessmentDisplayOrder = a.assessmentDisplayOrder;
+            p.openViolation = a.openViolation;
             p.contentId = cdl.ContentDocumentId;
             p.contentCDLId = cdl.Id;
             p.contentTitle = cdl.ContentDocument.Title;
@@ -79,6 +92,7 @@ public with sharing class PS2LPIInspectionPhotoController
         System.debug('contentList = ' + JSON.serializePretty(contentList));
 
         taskList.sort ();
+        resultList.sort ();
 
         //////////////////////////////////////////
         // remove empty items from content list //
@@ -97,6 +111,7 @@ public with sharing class PS2LPIInspectionPhotoController
 
         PS2ContentPkg pkg = new PS2ContentPkg();
         pkg.taskList = taskList;
+        pkg.resultList = resultList;
         pkg.contentList = contentList;
 
         return JSON.serializePretty(pkg);
@@ -106,6 +121,8 @@ public with sharing class PS2LPIInspectionPhotoController
     {
         @AuraEnabled
         public List<String> taskList = null;
+        @AuraEnabled
+        public List<String> resultList = null;
         @AuraEnabled
         public List<PS2Content> contentList = null;
     }
@@ -124,6 +141,8 @@ public with sharing class PS2LPIInspectionPhotoController
         public String assessmentResult = null;
         @AuraEnabled
         public Integer assessmentDisplayOrder = null;
+        @AuraEnabled
+        public Boolean openViolation = false;
     }
 
     private class PS2Content
@@ -140,6 +159,8 @@ public with sharing class PS2LPIInspectionPhotoController
         public String assessmentResult = null;
         @AuraEnabled
         public Integer assessmentDisplayOrder = null;
+        @AuraEnabled
+        public String result = null;
         @AuraEnabled
         public Id contentId = null;
         @AuraEnabled
@@ -162,6 +183,8 @@ public with sharing class PS2LPIInspectionPhotoController
         public Id versionId = null;
         @AuraEnabled
         public String versionURL = null;
+        @AuraEnabled
+        public Boolean openViolation = false;
     }
 
     // PS2LPIInspectionPhotoController.test();

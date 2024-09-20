@@ -9,5 +9,11 @@
         <members>ps2LPIInspectionPhotoCard</members>
         <name>LightningComponentBundle</name>
     </types>
+    <types>
+        <members>PS2LPIFail</members>
+        <members>PS2LPIPass</members>
+        <members>PS2LPIViolation</members>
+        <name>StaticResource</name>
+    </types>
     <version>55.0</version>
 </Package>

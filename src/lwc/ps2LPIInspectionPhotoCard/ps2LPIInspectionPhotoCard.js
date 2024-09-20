@@ -1,5 +1,8 @@
 import { LightningElement, api } from 'lwc';
 import {NavigationMixin} from 'lightning/navigation';
+import ViolationIcon from '@salesforce/resourceUrl/PS2LPIViolation';
+import PassIcon from '@salesforce/resourceUrl/PS2LPIPass';
+import FailIcon from '@salesforce/resourceUrl/PS2LPIFail';
 
 export default class Ps2LPIInspectionPhotoCard extends NavigationMixin(LightningElement) {
   @api id;
@@ -14,7 +17,28 @@ export default class Ps2LPIInspectionPhotoCard extends NavigationMixin(Lightning
   @api content;
   thumbnailURL;
 
+  violationIcon = ViolationIcon;
+  passIcon = PassIcon;
+  failIcon = FailIcon;
+
+  @api
+  get isViolation() {
+    return this.content.openViolation;
+  }
+
+  @api
+  get isPass() {
+    return (this.content.assessmentResult == 'Pass');
+  }
+
+  @api
+  get isFail() {
+    return (this.content.assessmentResult == 'Fail');
+  }
+
   connectedCallback() {
+    console.log('ViolationIcon=' + ViolationIcon);
+ 
     this.thumbnailURL = '/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=' + this.content.versionId;
   }
   
@@ -61,6 +85,19 @@ export default class Ps2LPIInspectionPhotoCard extends NavigationMixin(Lightning
         attributes: {
             recordId: this.content.assessmentId,
             objectApiName: 'InspectionAssessmentInd',
+            actionName: 'view'
+        },
+    });
+  }
+
+  handleViolation(event) {
+    console.log('violation clicked');
+    this[NavigationMixin.Navigate]({
+        type: 'standard__recordRelationshipPage',
+        attributes: {
+            recordId: this.content.assessmentId,
+            objectApiName: 'InspectionAssessmentInd',
+            relationshipApiName: 'RegCodeInspectionAssmntInd',
             actionName: 'view'
         },
     });
