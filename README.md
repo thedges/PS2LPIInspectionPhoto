@@ -7,6 +7,8 @@ Simple demo LWC to show all photos related to a PSS Visit. Provides the followin
 * Click on photo to get preview modal which allows to download photo
 * Click on task name to jump to Task record
 * Click on assessment name to jump to Inspection Assessment Indicator record
+* Pass/Fail icon to show in top-left of image based on Assessment Results value
+* Violation icon shows up in top-right if an image is associated to an assessment that has any "open" violations. Click on the violation icon and will take you to the list of violations associated to that assessment.
 
 # Sample Image
 ![alt text](https://github.com/thedges/PS2LPIInspectionPhoto/blob/main/PS2LPIInspectionPhoto.jpg "PS2LPIInspectionPhoto")
